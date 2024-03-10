@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, Admin!</h2>
+        <h3>View and Edit Tables</h3>
+        <form id="table-form">
+            <select id="table-select" name="table">
+                <option value="">Select a table</option>
+            </select>
+            <button type="submit">View Table</button>
+        </form>
+    </div>
+
+    <script>
+        // Fetch table names from server
+        fetch('get_tables.php')
+            .then(response => response.json())
+            .then(data => {
+                const tableSelect = document.getElementById('table-select');
+                data.forEach(table => {
+                    const option = document.createElement('option');
+                    option.value = table;
+                    option.textContent = table;
+                    tableSelect.appendChild(option);
+                });
+            });
+
+        // Handle form submission
+        document.getElementById('table-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const table = document.getElementById('table-select').value;
+            if (table) {
+                window.location.href = 'view_table.php?table=' + table;
+            }
+        });
+    </script>
+</body>
+</html>

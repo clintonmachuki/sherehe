@@ -219,3 +219,32 @@ h2 {
 p {
     margin: 10px 0;
 }
+/* Add styles for event image */
+.event-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Adjust styles for event listing */
+.event {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.event h3 {
+    color: #007bff;
+    margin-top: 0;
+}
+
+.event p {
+    margin: 10px 0;
+}
+
+.event-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}

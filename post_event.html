@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h2>Post Event</h2>
-        <form action="post_event.php" method="post">
+        <form action="post_event.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="event_title">Event Title:</label>
                 <input type="text" id="event_title" name="event_title" required>
@@ -26,8 +26,37 @@
                 <label for="event_time">Event Time:</label>
                 <input type="time" id="event_time" name="event_time" required>
             </div>
+            <div class="form-group">
+                <label for="event_image">Event Image(s):</label>
+                <input type="file" id="event_image" name="event_image[]" multiple accept="image/*">
+                <div id="image-preview"></div>
+            </div>
+            <div class="form-group">
+                <label for="artists">Artists:</label>
+                <textarea id="artists" name="artists" rows="3"></textarea>
+            </div>
             <button type="submit" class="btn">Post Event</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('event_image').addEventListener('change', function(e) {
+            const preview = document.getElementById('image-preview');
+            preview.innerHTML = '';
+            const files = e.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '200px';
+                    img.style.marginRight = '10px';
+                    preview.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 </html>
